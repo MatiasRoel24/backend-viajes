@@ -13,13 +13,13 @@ export const login = async(req, res = response) => {
         const usuario = await Usuario.findOne({correo})
         if(!usuario){
             return res.status(400).json({
-                msg: "Usuario / password no son correctos"
+                msg: "El correo que ingreso no existe"
             })
         }
 
         if(!usuario.estado){
             return res.status(400).json({
-                msg: "Usuario / password no son correctos - estado = false"
+                msg: "Usuario - estado = false"
             })
         }
 
