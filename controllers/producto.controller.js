@@ -11,7 +11,7 @@ export const getProductos = async(req,res) => {
 
 export const getProductosByCorreo = async(req,res) => {
     try {
-        const { correo } = req.body;
+        const { correo } = req.params;
         if(correo){
             const productos = await Producto.find({correo});
             res.json(productos);

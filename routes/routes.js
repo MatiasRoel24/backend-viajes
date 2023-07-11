@@ -58,7 +58,7 @@ router.post('/auth/login',[
 
 //PRODUCTOS
 router.get('/productos', getProductos)
-router.get('/productos-correo', getProductosByCorreo)
+router.get('/productos/:correo', getProductosByCorreo)
 router.post('/productos',[
         check('correo', 'El correo es obligatorio').isEmail().custom( correoExistente ),
         validarCampos
