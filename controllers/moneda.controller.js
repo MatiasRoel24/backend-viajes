@@ -45,7 +45,7 @@ Body:
 */
 
 export const getMexicanoToPeso = async(req,res) => {
-   const { mexicanos }  = req.body;
+   const { mexicanos }  = req.params;
 
    //APIS
    const divisas =  await divisasApi();

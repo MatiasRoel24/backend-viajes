@@ -71,6 +71,6 @@ router.get('/productos/:id', getProducto)
 //MONEDAS
 router.get('/dolar',  getDolar)  
 router.get('/divisas', getDivisas)  
-router.get('/peso', getMexicanoToPeso)  
+router.get('/peso/:mexicanos', getMexicanoToPeso)  
 
 export default router;
