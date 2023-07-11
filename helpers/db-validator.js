@@ -26,3 +26,10 @@ export const existeUsuarioPorId = async( id ) =>{
         throw new Error(`El id: ${id} no existe`)
     }
 }
+
+export const correoExistente = async( correo = '') =>{
+    const existeEmail = await Usuario.findOne( {correo} );
+    if( !existeEmail ) {
+        throw new Error(`El correo ${correo} NO esta registrado`)
+    }
+}

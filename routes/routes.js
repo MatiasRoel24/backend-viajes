@@ -10,14 +10,15 @@ import { getProductos,
         createProducto,
         updateProducto,
         deleteProducto,
-        getProducto } from "../controllers/producto.controller.js";
+        getProducto, 
+        getProductosByCorreo} from "../controllers/producto.controller.js";
 import {getDivisas,
         getDolar,
         getMexicanoToPeso } from "../controllers/moneda.controller.js";
 import { login } from '../controllers/auth.controller.js';
 
 import { validarCampos } from '../middlewares/validar-campos.js';
-import { emailExiste, esRoleValido, existeUsuarioPorId } from '../helpers/db-validator.js';
+import { correoExistente, emailExiste, esRoleValido, existeUsuarioPorId } from '../helpers/db-validator.js';
 import { validarJWT } from '../middlewares/validar-jwt.js';
 import { esAdminRole } from '../middlewares/validar-roles.js';
 
@@ -57,7 +58,11 @@ router.post('/auth/login',[
 
 //PRODUCTOS
 router.get('/productos', getProductos)
-router.post('/productos', createProducto)
+router.get('/productos-correo', getProductosByCorreo)
+router.post('/productos',[
+        check('correo', 'El correo es obligatorio').isEmail().custom( correoExistente ),
+        validarCampos
+], createProducto)
 router.put('/productos/:id', updateProducto)
 router.delete('/productos/:id', deleteProducto)
 router.get('/productos/:id', getProducto)

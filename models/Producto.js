@@ -12,6 +12,10 @@ const productoSchema = new mongoose.Schema({
         required:true,
         trim:true
     },
+    correo: {
+        type: String,
+        required:[true, 'El correo es obligatorio'],
+    },
     precio:{
         type: Number
     }

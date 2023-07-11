@@ -9,11 +9,24 @@ export const getProductos = async(req,res) => {
     }
 };
 
+export const getProductosByCorreo = async(req,res) => {
+    try {
+        const { correo } = req.body;
+        if(correo){
+            const productos = await Producto.find({correo});
+            res.json(productos);
+        }
+        
+    } catch (error) {
+        return res.status(500).json({message: error.message})
+    }
+};
+
 export const createProducto = async(req,res) => {
 
     try {
-        const {titulo, descripcion, precio} = req.body;
-        const newProducto = new Producto({titulo, descripcion, precio});
+        const {titulo, descripcion, correo , precio} = req.body;
+        const newProducto = new Producto({titulo, descripcion, correo, precio});
         await newProducto.save();
         return res.json(newProducto);
     } catch (error) {
@@ -33,7 +46,6 @@ export const updateProducto = async(req,res) => {
 
 export const deleteProducto = async(req,res) => {
     try {
-        console.log(req.params.id);
         const productoRemove = await Producto.findByIdAndDelete(req.params.id);
         if(!productoRemove) return res.sendStatus(404);
         return res.sendStatus(204);
