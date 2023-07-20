@@ -58,14 +58,16 @@ router.post('/auth/login',[
 
 //PRODUCTOS
 router.get('/productos', getProductos)
-router.get('/productos/:correo', getProductosByCorreo)
+router.get('/productos/:id', getProducto)
+router.get('/productos-correo/:correo', getProductosByCorreo)
+
 router.post('/productos',[
         check('correo', 'El correo es obligatorio').isEmail().custom( correoExistente ),
         validarCampos
 ], createProducto)
 router.put('/productos/:id', updateProducto)
 router.delete('/productos/:id', deleteProducto)
-router.get('/productos/:id', getProducto)
+
 
 
 //MONEDAS

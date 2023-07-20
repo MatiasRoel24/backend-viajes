@@ -57,7 +57,8 @@ export const deleteProducto = async(req,res) => {
 
 export const getProducto = async(req,res) => {
     try {
-        const producto = await Producto.findById(req.params.id);
+        const { id } = req.params;
+        const producto = await Producto.findById(id);
         if(!producto) return res.sendStatus(404);
         res.json(producto);
     } catch (error) {
