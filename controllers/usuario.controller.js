@@ -3,6 +3,7 @@ import {response, request} from 'express'
 import bcryptjs from 'bcryptjs'
 //MODELO DE USUARIO
 import Usuario from '../models/Usuario.js';
+import { generarJWT } from "../helpers/generar-jwt.js";
 
 //PETICION GET - LOGICA
 export const usuariosGet = async(req = request, res = response) =>{
@@ -33,11 +34,14 @@ export const usuariosPost = async(req = request, res = response) =>{
     const salt = bcryptjs.genSaltSync();
     usuario.password = bcryptjs.hashSync( password, salt );
 
+    const token = await generarJWT( usuario.id );
+
     //Guardar en base de datos
     await usuario.save();
 
     res.json({
-        usuario
+        usuario,
+        token
     })
 };
 
