@@ -41,11 +41,13 @@ export const getDivisas = async(req = request, res= response) => {
 Body:
    {
       "mexicanos": {cantidad de pesos}
+      "valorMexicanos": {valor del peso mexicano}
    }
 */
 
 export const getMexicanoToPeso = async(req,res) => {
-   const { mexicanos }  = req.params;
+   const { mexicanos, valorMexicano }  = req.params;
+   let mexicano;
 
    //APIS
    const divisas =  await divisasApi();
@@ -53,8 +55,13 @@ export const getMexicanoToPeso = async(req,res) => {
 
    //Varibles de dolar/mexicano
    const dolarBlue = dolar.blue.value_sell;
-   const mexicano = divisas.rates["MXN"];
 
+   if(valorMexicano !== 0){
+      mexicano = valorMexicano
+   }else{
+      mexicano = divisas.rates["MXN"];
+   }
+   
    //Cuentas
    const dolares = (mexicanos / mexicano).toFixed(2);
    const pesos = (dolares * dolarBlue).toFixed(2);

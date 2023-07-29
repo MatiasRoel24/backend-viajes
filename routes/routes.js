@@ -73,6 +73,6 @@ router.delete('/productos/:id', deleteProducto)
 //MONEDAS
 router.get('/dolar',  getDolar)  
 router.get('/divisas', getDivisas)  
-router.get('/peso/:mexicanos', getMexicanoToPeso)  
+router.get('/peso/:mexicanos/:valorMexicano', getMexicanoToPeso)  
 
 export default router;
