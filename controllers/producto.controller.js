@@ -48,7 +48,7 @@ export const deleteProducto = async(req,res) => {
     try {
         const productoRemove = await Producto.findByIdAndDelete(req.params.id);
         if(!productoRemove) return res.sendStatus(404);
-        return res.sendStatus(204);
+        return res.status(204).json({msg: "Se borro correctamente"});
     } catch (error) {
         return res.status(500).json({message: error.message})
     }  
